@@ -22,4 +22,4 @@ Datos = LOAD 'data.tsv' USING PigStorage('\t')
 
 ordered_data = ORDER datos BY (letra, quantity);
 
-STORE wordcount INTO 'output' USING PigStorage(',');
+STORE ordered_data INTO 'output' USING PigStorage(',');
