@@ -10,11 +10,9 @@ evaluación, pig sera eejcutado ejecutado en modo local:
 
 $ pig -x local -f pregunta.pig
 
-        
-
         >>> Escriba su respuesta a partir de este punto <<<
 
-        Datos = LOAD 'data.tsv'
+        Datos = LOAD 'data.tsv' USING PigStorage(',')
                 AS (
                         letra:chararray,
                         eventDate:chararray,
@@ -30,5 +28,5 @@ $ pig -x local -f pregunta.pig
         -- genera una variable que cuenta las ocurrencias por cada grupo
         wordcount = FOREACH grouped GENERATE group, COUNT(words);
 
-        STORE wordcount INTO 'output/';
+        STORE wordcount INTO 'output/' USING PigStorage(',');
 */
