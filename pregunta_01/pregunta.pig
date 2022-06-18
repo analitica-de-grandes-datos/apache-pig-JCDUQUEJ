@@ -30,5 +30,5 @@ $ pig -x local -f pregunta.pig
         -- genera una variable que cuenta las ocurrencias por cada grupo
         wordcount = FOREACH grouped GENERATE group, COUNT(words);
 
-        STORE wordcount INTO 'output/';
+        STORE wordcount INTO 'output';
 */
