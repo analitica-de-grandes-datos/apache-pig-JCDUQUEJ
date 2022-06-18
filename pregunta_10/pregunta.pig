@@ -30,8 +30,10 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
             numero:int
         );
 
-specific_columns = FOREACH Datos GENERATE apellido, LEN(apellido);
+specific_columns = FOREACH Datos GENERATE apellido, SIZE(apellido) AS tamano;
 
-ordered_data = ORDER specific_columns BY LEN(apellido) desc;
+ordered_data = ORDER specific_columns BY tamano DESC, apellido ASC;
 
-STORE ordered_data INTO 'output' USING PigStorage(',');
+respuesta = LIMIT ordered_data 5;
+
+STORE respuesta INTO 'output' USING PigStorage(',')
