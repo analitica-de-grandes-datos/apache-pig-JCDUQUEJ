@@ -12,7 +12,7 @@ $ pig -x local -f pregunta.pig
 
      >>> Escriba el codigo del mapper a partir de este punto <<<
 */
-Datos = LOAD 'data.tsv' USING PigStorage(',')
+Datos = LOAD 'data.tsv' USING PigStorage('   ')
         AS (
                 letra:chararray,
                 eventDate:chararray,

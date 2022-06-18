@@ -15,7 +15,7 @@ $ pig -x local -f pregunta.pig
 
 */
 
-Datos = LOAD 'data.tsv' USING PigStorage(',')
+Datos = LOAD 'data.tsv' USING PigStorage('      ')
         AS (
                 letra:chararray,
                 eventDate:chararray,
