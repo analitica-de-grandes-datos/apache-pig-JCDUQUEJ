@@ -46,6 +46,6 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
 
 truck_events_subset = LIMIT Datos 10;
 
-specific_columns = FOREACH truck_events_subset GENERATE driverId, eventTime, eventType;
+specific_columns = FOREACH truck_events_subset GENERATE driverId, truckId, eventTime;
 
 STORE specific_columns INTO 'output' USING PigStorage(',');

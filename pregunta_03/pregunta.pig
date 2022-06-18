@@ -18,11 +18,10 @@ Datos = LOAD 'data.tsv' USING PigStorage('\t')
                 quantity:int
         );
 
--- genera una tabla llamada words con una palabra por registro
-words = FOREACH Datos GENERATE quantity AS word;
-
-ordered_data = ORDER words BY quantity asc;
+ordered_data = ORDER Datos BY quantity asc;
 
 resultado = LIMIT ordered_data 5;
 
-STORE resultado INTO 'output' USING PigStorage(',');
+specific_columns = FOREACH resultado GENERATE quantity;
+
+STORE specific_columns INTO 'output' USING PigStorage(',');

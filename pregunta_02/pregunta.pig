@@ -20,6 +20,6 @@ Datos = LOAD 'data.tsv' USING PigStorage('\t')
         );
 
 
-ordered_data = ORDER datos BY (letra, quantity);
+ordered_data = ORDER Datos BY letra ASC, quantity ASC;
 
 STORE ordered_data INTO 'output' USING PigStorage(',');
