@@ -12,21 +12,23 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 
-        Datos = LOAD 'data.tsv' USING PigStorage(',')
-                AS (
-                        letra:chararray,
-                        eventDate:chararray,
-                        quantity:int
-                );
 
-        -- genera una tabla llamada words con una palabra por registro
-        words = FOREACH Datos GENERATE FLATTEN(TOKENIZE(letra)) AS word;
-
-        -- agrupa los registros que tienen la misma palabra
-        grouped = GROUP words BY word;
-
-        -- genera una variable que cuenta las ocurrencias por cada grupo
-        wordcount = FOREACH grouped GENERATE group, COUNT(words);
-
-        STORE wordcount INTO 'output/' USING PigStorage(',');
 */
+
+Datos = LOAD 'data.tsv' USING PigStorage(',')
+        AS (
+                letra:chararray,
+                eventDate:chararray,
+                quantity:int
+        );
+
+-- genera una tabla llamada words con una palabra por registro
+words = FOREACH Datos GENERATE FLATTEN(TOKENIZE(letra)) AS word;
+
+-- agrupa los registros que tienen la misma palabra
+grouped = GROUP words BY word;
+
+-- genera una variable que cuenta las ocurrencias por cada grupo
+wordcount = FOREACH grouped GENERATE group, COUNT(words);
+
+STORE wordcount INTO 'output' USING PigStorage(',');
