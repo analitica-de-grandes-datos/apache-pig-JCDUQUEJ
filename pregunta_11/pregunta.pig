@@ -43,8 +43,10 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
             numero:int
         );
 
-specific_columns = FOREACH Datos GENERATE apellido, UPPER(apellido) AS mayuscula, LOWER(apellido) AS minuscula;
+specific_columns = FOREACH Datos GENERATE apellido;
 
 ordered_data = ORDER specific_columns BY apellido ASC;
+
+apellidos_respuesta = FOREACH specific_columns GENERATE apellido, UPPER(apellido) AS mayuscula, LOWER(apellido) AS minuscula;
 
 STORE ordered_data INTO 'output' USING PigStorage(',')

@@ -36,4 +36,4 @@ ordered_data = ORDER specific_columns BY tamano DESC, apellido ASC;
 
 respuesta = LIMIT ordered_data 5;
 
-STORE respuesta INTO 'output' USING PigStorage(',')
+STORE respuesta INTO 'output' USING PigStorage(',');
