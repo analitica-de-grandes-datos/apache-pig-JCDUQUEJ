@@ -27,4 +27,4 @@ data = FOREACH Datos GENERATE columna1, SIZE(columna2) AS col2, SIZE(columna3) A
 
 ordered_data = ORDER data BY columna1 ASC, col2 ASC, col3 ASC;
 
-STORAGE ordered_data INTO 'output' USING PigStorage(',');
+STORE ordered_data INTO 'output' USING PigStorage(',');

@@ -36,4 +36,4 @@ grouped = GROUP tuplas BY clave;
 
 wordcount = FOREACH grouped GENERATE group, COUNT(tuplas);
 
-STORAGE wordcount INTO 'output' USING PigStorage(',');
+STORE wordcount INTO 'output' USING PigStorage(',');
