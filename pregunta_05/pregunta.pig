@@ -19,10 +19,12 @@ Datos = LOAD 'data.tsv' USING PigStorage('\t')
             columna3:chararray
         );
 
-specific_column = FOREACH Datos GENERATE columna2;
+words = FOREACH Datos GENERATE REPLACE(REPLACE(columna2,'\\}',''),'\\{','') as col2;
 
-letras = FOREACH specific_column GENERATE FLATTEN(TOKENIZE(specific_column)) AS word;
+letras = FOREACH words GENERATE FLATTEN(TOKENIZE(col2)) AS word;
 
+grouped = GROUP letras BY word;
 
+wordcount = FOREACH grouped GENERATE group, COUNT(letras);
 
-DUMP letras;
+STORE wordcount INTO 'output' USING PigStorage(',')

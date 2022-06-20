@@ -14,3 +14,21 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+Datos = LOAD 'data.tsv' USING PigStorage('\t')
+        AS (
+            columna1:chararray,
+            columna2:chararray,
+            columna3:chararray
+        );
+
+words = FOREACH Datos GENERATE REPLACE(REPLACE(columna3,'\\[',''),'\\]','') AS col3;
+
+letras = FOREACH words GENERATE FLATTEN(TOKENIZE(col3)) AS word;
+
+cadena = FOREACH letras GENERATE SUBSTRING(word,0,3) AS claves;
+
+grouped = GROUP cadena BY claves;
+
+wordcount = FOREACH grouped GENERATE group, COUNT(cadena);
+
+STORE wordcount INTO 'output' USING PigStorage(',')
