@@ -27,4 +27,4 @@ grouped = GROUP letras BY word;
 
 wordcount = FOREACH grouped GENERATE group, COUNT(letras);
 
-STORE wordcount INTO 'output' USING PigStorage(',')
+STORE wordcount INTO 'output' USING PigStorage(',');

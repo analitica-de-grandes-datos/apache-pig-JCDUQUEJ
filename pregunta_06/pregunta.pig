@@ -31,4 +31,4 @@ grouped = GROUP cadena BY claves;
 
 wordcount = FOREACH grouped GENERATE group, COUNT(cadena);
 
-STORE wordcount INTO 'output' USING PigStorage(',')
+STORE wordcount INTO 'output' USING PigStorage(',');
