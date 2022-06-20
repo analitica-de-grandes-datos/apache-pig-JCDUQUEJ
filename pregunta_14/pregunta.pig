@@ -32,6 +32,6 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
 
 select_color = FOREACH Datos GENERATE color;
 
-color_b = FILTER select_color BY ($0 NOT MATCHES '.*b.*');
+color_b = FILTER select_color BY (NOT $0 MATCHES '.*b.*');
 
-STORE color_b INTO 'output'
+STORE color_b INTO 'output' USING PigStorage(',');
