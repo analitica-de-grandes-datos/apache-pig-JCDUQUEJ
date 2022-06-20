@@ -35,4 +35,4 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
 
 specific_columns = FOREACH Datos GENERATE SUBSTRING(fecha,0,4), SUBSTRING(fecha,2,4);
 
-STORE filtrado INTO 'output' USING PigStorage(',');
+STORE specific_columns INTO 'output' USING PigStorage(',');
