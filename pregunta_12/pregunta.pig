@@ -39,6 +39,6 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
 
 specific_columns = FOREACH Datos GENERATE apellido;
 
-filtrado = FILTER specific_columns BY (($0 MATCHES '.*d.*'), ($0 MATCHES '.*l.*'));
+filtrado = FILTER specific_columns BY SUBSTRING(apellido,1,0) > '.*D.*';
 
 STORE filtrado INTO 'output';

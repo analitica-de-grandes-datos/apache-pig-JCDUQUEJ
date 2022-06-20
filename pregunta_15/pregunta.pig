@@ -34,4 +34,4 @@ selected_data = FOREACH Datos GENERATE nombre, color;
 
 respuesta = FILTER selected_data BY ($1 MATCHES '.*blue.*') AND ($0 MATCHES '.*Z.*');
 
-STORE respuesta INTO 'output';
+STORE respuesta INTO 'output' USING PigStorage(' ');
