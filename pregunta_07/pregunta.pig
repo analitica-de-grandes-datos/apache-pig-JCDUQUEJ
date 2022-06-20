@@ -18,7 +18,13 @@ $ pig -x local -f pregunta.pig
 Datos = LOAD 'data.tsv' USING PigStorage('\t')
         AS (
             columna1:chararray,
-            columna2:chararray,
-            columna3:chararray
+            columna2:BAG{},
+            columna3:MAP[]
         );
 
+
+data = FOREACH Datos GENERATE columna1, SIZE(columna2) AS col2, SIZE(columna3) AS col3;
+
+ordered_data = ORDER data BY columna1 ASC, col2 ASC, col3 ASC;
+
+STORAGE ordered_data INTO 'output' USING PigStorage(',');
