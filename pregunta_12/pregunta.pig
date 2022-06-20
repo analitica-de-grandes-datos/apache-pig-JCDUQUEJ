@@ -41,4 +41,4 @@ specific_columns = FOREACH Datos GENERATE apellido;
 
 filtrado = FILTER specific_columns BY (($0 MATCHES '.*d.*'), ($0 MATCHES '.*l.*'));
 
-STORE filtrado INTO 'output' USING PigStorage(',');
+STORE filtrado INTO 'output';

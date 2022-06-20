@@ -36,4 +36,4 @@ select_color = FOREACH Datos GENERATE color;
 
 color_b = FILTER select_color BY ($0 MATCHES '.*b.*');
 
-STORE color_b INTO 'output' USING PigStorage(',');
+STORE color_b INTO 'output';

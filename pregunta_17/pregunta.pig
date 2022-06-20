@@ -34,4 +34,4 @@ selected_data = FOREACH Datos GENERATE nombre, color;
 
 respuesta = FILTER selected_data BY color IN ('blue', 'black');
 
-STORE respuesta INTO 'output' USING PigStorage(',');
+STORE respuesta INTO 'output';
