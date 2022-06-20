@@ -23,3 +23,16 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+Datos = LOAD 'data.csv' USING PigStorage(',')
+        AS (
+            posicion:int,
+            nombre:chararray,
+            apellido:chararray,
+            fecha:chararray,
+            color:chararray,
+            numero:int
+        );
+
+specific_columns = FOREACH Datos GENERATE SUBSTRING(fecha,0,4), SUBSTRING(fecha,2,4);
+
+STORE filtrado INTO 'output' USING PigStorage(',');
