@@ -19,5 +19,19 @@ evaluación, pig sera eejcutado ejecutado en modo local:
 $ pig -x local -f pregunta.pig
 
         /* >>> Escriba su respuesta a partir de este punto <<< */
-*/
 
+Datos = LOAD 'data.csv' USING PigStorage(',')
+        AS (
+            posicion:int,
+            nombre:chararray,
+            apellido:chararray,
+            fecha:chararray,
+            color:chararray,
+            numero:int
+        );
+
+selected_data = FOREACH Datos GENERATE nombre, color;
+
+respuesta = FILTER selected_data BY ($1 MATCHES '.*blue.*') OR ($0 MATCHES '.*K.*');
+
+STORE respuesta INTO 'output' USING PigStorage(',');
