@@ -44,6 +44,13 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
             numero:int
         );
 
-selected_data = FOREACH Datos GENERATE ToString(fecha,'yyyy-MM-dd'), ToString(fecha,'dd'), GetDay(fecha), LOWER(ToString(fecha,'EEE')), LOWER(ToString(fecha,'EEEE'));
+selected_data = FOREACH Datos GENERATE ToString(fecha,'yyyy-MM-dd') AS fecha, ToString(fecha,'dd') AS dia1, GetDay(fecha) AS dia2, LOWER(ToString(fecha,'EEE')) AS dia3, LOWER(ToString(fecha,'EEEE')) AS dia4;
+selected_data = FOREACH selected_data GENERATE fecha, dia1, dia2, REPLACE(dia3,'mon','lun'), REPLACE(dia4,'monday','lunes');
+selected_data = FOREACH selected_data GENERATE fecha, dia1, dia2, REPLACE(dia3,'tue','mar'), REPLACE(dia4,'tuesday','martes');
+selected_data = FOREACH selected_data GENERATE fecha, dia1, dia2, REPLACE(dia3,'wed','mie'), REPLACE(dia4,'wednesday','miercoles');
+selected_data = FOREACH selected_data GENERATE fecha, dia1, dia2, REPLACE(dia3,'thu','jue'), REPLACE(dia4,'thursday','jueves');
+selected_data = FOREACH selected_data GENERATE fecha, dia1, dia2, REPLACE(dia3,'fri','vie'), REPLACE(dia4,'friday','viernes');
+selected_data = FOREACH selected_data GENERATE fecha, dia1, dia2, REPLACE(dia3,'sat','sab'), REPLACE(dia4,'saturday','sabado');
+selected_data = FOREACH selected_data GENERATE fecha, dia1, dia2, REPLACE(dia3,'sun','dom'), REPLACE(dia4,'sunday','domingo');
 
 STORE selected_data INTO 'output' USING PigStorage(',');

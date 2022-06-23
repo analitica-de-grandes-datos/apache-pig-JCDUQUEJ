@@ -43,6 +43,10 @@ Datos = LOAD 'data.csv' USING PigStorage(',')
             numero:int
         );
 
-selected_data = FOREACH Datos GENERATE ToString(fecha,'yyyy-MM-dd'), LOWER(ToString(fecha,'MMM')), ToString(fecha,'MM'), GetMonth(fecha);
+selected_data = FOREACH Datos GENERATE ToString(fecha,'yyyy-MM-dd') AS fecha, LOWER(ToString(fecha,'MMM')) AS mes1, ToString(fecha,'MM') AS mes2, GetMonth(fecha) AS mes3;
+selected_data = FOREACH selected_data GENERATE fecha, REPLACE(mes1,'jan','ene'), mes2, mes3;
+selected_data = FOREACH selected_data GENERATE fecha, REPLACE(mes1,'apr','abr'), mes2, mes3;
+selected_data = FOREACH selected_data GENERATE fecha, REPLACE(mes1,'aug','ago'), mes2, mes3;
+selected_data = FOREACH selected_data GENERATE fecha, REPLACE(mes1,'dec','dic'), mes2, mes3;
 
 STORE selected_data INTO 'output' USING PigStorage(',');
